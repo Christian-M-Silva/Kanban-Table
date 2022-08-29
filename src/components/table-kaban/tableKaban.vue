@@ -8,8 +8,12 @@
         :key="index"
       >
         <h2>
-          {{ stage }} 
-          <span>{{ itens[index].quantity }}</span>
+          {{ stage }}
+          <span>{{
+            items.filter((el) => {
+              return el.status == stage;
+            }).length
+          }}</span>
         </h2>
       </div>
       <div v-for="block in blocks" :slot="block.id" :key="block.id">

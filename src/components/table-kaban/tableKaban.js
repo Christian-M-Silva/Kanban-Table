@@ -48,38 +48,30 @@ export default {
           mainEnemy: "Batman",
         },
       ],
-      itens: [
-        { quantity: '' },
-        { quantity: '' },
-        { quantity: '' },
-        { quantity: '' },
-      ]
+      items: []
     }
   },
 
   methods: {
-    updateBlock(id, status) {
+    updateBlock(id, stage) {
+      this.items = []
       //O id representa o id d card que estou mexendo
       //O status é o stage atual que estou colocando o card
-      this.blocks[id].status = status
-      let teste = []
-
+      this.blocks[id].status = stage //Aqui estou fazendo que o o meu card que estou mexendo tenha o status dele atualizado para o status ou stage
+      this.statusQuantity()
+    },
+    statusQuantity() {
       this.blocks.forEach(el => {
-        return teste.push(el.status)
+        this.items.push(
+          {
+            status: el.status
+          }
+        )
       });
-
-
-
-      let totais = {};
-      teste.forEach(x => {
-        totais[x] = (totais[x] || 0) + 1;
-      });
-
-
-      this.itens[0].quantity = (totais["Vilão"] || 0)
-      this.itens[1].quantity = (totais["Anti-herói"] || 0)
-      this.itens[2].quantity = (totais["Vigilante"] || 0)
-      this.itens[3].quantity = (totais["Herói"] || 0)
     }
+  },
+
+  created() {
+    this.statusQuantity()
   }
 };
